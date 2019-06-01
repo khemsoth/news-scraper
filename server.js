@@ -18,6 +18,16 @@ var app = express();
 
 // Configure middleware
 
+// Set Handlebars.
+var exphbs = require("express-handlebars");
+
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
+
+// Import routes and give the server access to them.
+var routes = require("./routes/html-routes");
+
+app.use(routes);
 // Use morgan logger for logging requests
 app.use(logger("dev"));
 // Parse request body as JSON
