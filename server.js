@@ -36,6 +36,9 @@ app.use(express.json());
 // Make public a static folder
 app.use(express.static("public"));
 
+mongoose.connect("mongodb://localhost/news", { useNewUrlParser: true });
+
+
 // Start the server
 app.listen(PORT, function() {
   console.log("App running on port " + PORT + "!");
