@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const axios = require('axios');
 const cheerio = require('cheerio');
-const db = require('../models')
+const db = require('../models');
 
 router.get('/', function(req, res) {
   res.render('index');
@@ -23,10 +23,32 @@ router.get('/scrape', function(req, res) {
       .then(function(news) {
         console.log(news);
       })
-      res.end();
     })
   })
+  res.render('scrape');
   });
+
+router.get('/articles', function(req, res) {
+  db.News.find({}).then(function(data) {
+    //console.log(data);
+    var stuff = {
+      articles: []
+    }
+    for(var i = 0; i < 20; i++) {
+      var newsTitle = data[i].title;
+      var newsLink = data[i].link;
+      var obj = {
+       title: newsTitle,
+       link: newsLink
+      }
+      stuff.articles.push(obj);     
+  }
+    console.log(stuff.articles);
+    res.render('articles', stuff)
+
+  })
+
+  })
 
 router.get('*', function(req, res) {
   res.render('index');
