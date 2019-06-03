@@ -9,10 +9,17 @@ router.get('/', function(req, res) {
 });
 
 router.get('/saved', function(req, res) {
+  var result = {};
+  
+  db.Saved.create(result)
+  .then(function(saved) {
+    console.log(saved);
+  })
   res.render('saved');
 });
 
-router.get('/scrape', function(req, res) {
+
+router.get('/articles', function(req, res) {
   axios.get('https://us.motorsport.com/').then(function(response) {
     var $ = cheerio.load(response.data);
     $('h3.ms-item_title').each(function(i, element) {
@@ -25,12 +32,7 @@ router.get('/scrape', function(req, res) {
       })
     })
   })
-  res.render('scrape');
-  });
-
-router.get('/articles', function(req, res) {
   db.News.find({}).then(function(data) {
-    //console.log(data);
     var stuff = {
       articles: []
     }
@@ -43,12 +45,9 @@ router.get('/articles', function(req, res) {
       }
       stuff.articles.push(obj);     
   }
-    console.log(stuff.articles);
     res.render('articles', stuff)
-
   })
-
-  })
+})
 
 router.get('*', function(req, res) {
   res.render('index');

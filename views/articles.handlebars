@@ -1,11 +1,56 @@
 <div class="container-fluid">
-<h2>Most Recent Motorsport Articles:</h2>
-<ul>
-  {{#each articles}}
-    <li>
+  <h2>Most Recent Motorsport Articles:</h2>
+  <ul>
+    {{#each articles}}
+    <li class="articleList" id='article'>
       <p>Title: {{title}}</p>
       <p>Link: {{link}}</p>
+      <button id='save-article'>Save this article</button>
+      <button id='comment-btn'>Leave a comment</button>
     </li>
-  {{/each}}
-</ul>
+    {{/each}}
+  </ul>
+
+  <div class="modal" id='commentModal' tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Add Comment</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" placeholder='Enter comment here'>
+          <div class="input-group input-group-sm mb-3">
+            <input type="text" class="form-control" aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-sm">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" id='cancel-btn'>Cancel</button>
+          <button type="button" class="btn btn-primary" id='addComment'>Add comment</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
+<script>
+  $('.articleList').each(function (num) {
+    $(this).attr('id', this.id + num);
+  });
+
+  $('#comment-btn').on('click', function (event) {
+    event.preventDefault();
+    console.log('comment button pressed');
+    $('#commentModal').show();
+  });
+
+  $('#cancel-btn').on('click', function () {
+    $('#commentModal').hide();
+  });
+
+  $('#addComment').on('click', function() {
+    
+  })
+</script>
