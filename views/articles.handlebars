@@ -40,7 +40,7 @@
     $(this).attr('id', this.id + num);
   });
 
-  $('#comment-btn').on('click', function (event) {
+  $('body').on('click', '#comment-btn', function (event) {
     event.preventDefault();
     console.log('comment button pressed');
     $('#commentModal').show();
@@ -54,7 +54,11 @@
         $('#commentModal').hide();
   })
 
-  $('#addComment').on('click', function() {
-    
+  $('body').on('click', '#viewComment', function() {
+    console.log('view comment button')
+  })
+
+  $('body').on('click', '#save-article', function() {
+    console.log('save article button');
   })
 </script>
