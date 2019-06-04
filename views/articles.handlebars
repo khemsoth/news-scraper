@@ -1,12 +1,12 @@
 <div class="container-fluid">
   <h2>Most Recent Motorsport Articles:</h2>
-  <ul>
-    {{#each articles}}
-    <li class="articleList" id='article'>
-      <p>Title: {{title}}</p>
-      <p>Link: {{link}}</p>
-      <button id='save-article'>Save this article</button>
-      <button id='comment-btn'>Leave a comment</button>
+<ul class="list-group list-group-flush">
+  {{#each articles}}
+    <li class="list-group-item" id='article'>
+      <p><a href="https://us.motorsport.com{{link}}"  class="text-body">Title: {{title}}</a></p>
+      <button type="button" class="btn btn-outline-dark" id='save-article'>Save this article</button>
+      <button type="button" class="btn btn-outline-dark" id='viewComment'>View comments</button>
+      <button type="button" class="btn btn-outline-dark" id='comment-btn'>Leave a comment</button>
     </li>
     {{/each}}
   </ul>
@@ -36,7 +36,7 @@
 </div>
 
 <script>
-  $('.articleList').each(function (num) {
+  $('.list-group-item').each(function (num) {
     $(this).attr('id', this.id + num);
   });
 
@@ -49,6 +49,10 @@
   $('#cancel-btn').on('click', function () {
     $('#commentModal').hide();
   });
+
+  $('.close').on('click', function() {
+        $('#commentModal').hide();
+  })
 
   $('#addComment').on('click', function() {
     
