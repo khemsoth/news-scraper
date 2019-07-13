@@ -13,6 +13,7 @@ router.get('/saved', function(req, res) {
   
   db.Saved.create(result)
   .then(function(saved) {
+    result.title = $(this).text().trim();
     console.log(saved);
   })
   res.render('saved');
